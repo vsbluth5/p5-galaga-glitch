@@ -1,43 +1,38 @@
-
-/* VELOCITY
-let x;
-let xVelocity;
+let birdY, fallSpeed, gravity, pipePos
 
 function setup() {
-  createCanvas(400, 400);
-  x = 200;
-  xVelocity = 5;
+  createCanvas(800, 600)
+  birdY = 300
+  fallSpeed = -5
+  gravity = 0.3
+  
+  pipePos = width
 }
 
 function draw() {
-  ellipse(x, 50, 25, 25);
-  x = x + xVelocity; // Change the position based on current velocity
+  background(220)
+  ellipse(200, birdY, 50, 50)
+  birdY += fallSpeed
+  fallSpeed += gravity
+  
+  // let the bird bounce off bottom
+  if (birdY + 25 > height) {
+  fallSpeed = -fallSpeed * 0.8
+}
+  
+  // draw the moving pipe
+  rect(pipePos, 0, 50, 250)
+rect(pipePos, 350, 50, height - 350)
+  pipePos -= 1
+  
+  if (pipePos < -50) {
+  pipePos = width
 }
 
-// END OF VELOCITY 
-*/
 
-let y;
-let yVelocity;
-let gravity;
-
-function setup() {
-  createCanvas(400, 400);
-  y = 0;
-  yVelocity = 0;
-  gravity = 0.5;
 }
 
-function draw() {
-  ellipse(200, 50, 25, 25);
-  y += yVelocity; // Change the position based on current velocity
-  yVelocity += gravity; // Change the velocity based on gravity
-  bounce(); 
-}
-
-function bounce() {
-  if (y >= height) { // if the ball hits the bottom of the screen...
-    yVelocity = -1 * yVelocity; // ...reverse its velocity.
-  }
+function keyPressed() {
+  fallSpeed = -10
 }
 
