@@ -1,14 +1,14 @@
-let birdY, fallSpeed, gravity, pipePos, score;
+let birdY, fallSpeed, gravity, pipePos, pipeSpeed, score;
 
 function setup() {
   createCanvas(800, 600);
-  birdY = 300;
-  fallSpeed = -5;
-  gravity = 0.1;
-
-  score = 0;
-
-  pipePos = width;
+  // birdY = 300;
+  // fallSpeed = -5;
+  // gravity = 0.1;
+  // score = 0;
+  // pipePos = width;
+  
+  newGame();
 }
 
 function draw() {
@@ -28,7 +28,7 @@ function draw() {
   // draw the moving pipe
   rect(pipePos, 0, 50, 250);
   rect(pipePos, 350, 50, height - 350);
-  pipePos -= 1;
+  pipePos += pipeSpeed;
 
   if (pipePos < -50) {
     score += 1
@@ -37,18 +37,27 @@ function draw() {
   
   // function takes seven paramters: rectX, rectY, rectWidth, rectHeight, circleX, circleY, circleDiameter
   if (collideRectCircle(pipePos, 0, 50, 250, 200, birdY, 50)) {
-  score = 0
+  // score = 0
+    newGame()
 }
   
   if (collideRectCircle(pipePos, 350, 50, height - 350, 200, birdY, 50)) {
-  score = 0
+  // score = 0
+    newGame()
 }
-
-
-
 
 }
 
 function keyPressed() {
   fallSpeed = -10;
 }
+
+function newGame() {
+  birdY = 300
+  fallSpeed = -5
+  gravity = 0.3
+  pipePos = width
+  pipeSpeed = -4
+  score = 0
+}
+
