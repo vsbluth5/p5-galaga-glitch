@@ -7,7 +7,7 @@ function setup() {
   // gravity = 0.1;
   // score = 0;
   // pipePos = width;
-  
+
   newGame();
 }
 
@@ -28,32 +28,58 @@ function draw() {
   // draw the moving pipe
   // rect(pipePos, 0, 50, 250);
   // rect(pipePos, 350, 50, height - 350);
-  
-  rect(pipePos, 0, 50, gapHeight)
-  rect(pipePos, gapHeight + gapSize, 50, height - (gapHeight + gapSize))
+
+  rect(pipePos, 0, 50, gapHeight);
+  rect(pipePos, gapHeight + gapSize, 50, height - (gapHeight + gapSize));
 
   pipePos += pipeSpeed;
 
   if (pipePos < -50) {
-    score += 1
+    score += 1;
     pipePos = width;
-    
-    // increase difficulty
-    pipeSpeed += -0.5
-gravity += 0.01
-  }
-  
-  // function takes seven paramters: rectX, rectY, rectWidth, rectHeight, circleX, circleY, circleDiameter
-  if (collideRectCircle(pipePos, 0, 50, 250, 200, birdY, 50)) {
-  // score = 0
-    newGame()
-}
-  
-  if (collideRectCircle(pipePos, 350, 50, height - 350, 200, birdY, 50)) {
-  // score = 0
-    newGame()
-}
 
+    // increase difficulty
+    pipeSpeed += -0.5;
+    gravity += 0.01;
+  }
+
+  // function takes seven paramters: rectX, rectY, rectWidth, rectHeight, circleX, circleY, circleDiameter
+  if (collideRectCircle(pipePos, 0, 50, gapHeight, 200, birdY, 50)) {
+    // score = 0
+    newGame();
+  }
+
+  if (
+    collideRectCircle(
+      pipePos,
+      350,
+      50,
+      height - gapHeight - gapSize,
+      200,
+      birdY,
+      50
+    )
+  ) {
+    // score = 0
+    newGame();
+  }
+
+  // if (collideRectCircle(pipePos, 0, 50, gapHeight, 200, birdY, 50)) {
+  //   newGame();
+  // }
+  // if (
+  //   collideRectCircle(
+  //     pipePos,
+  //     gapHeight + gapSize,
+  //     50,
+  //     height - (gapHeight + gapSize),
+  //     200,
+  //     birdY,
+  //     50
+  //   )
+  // ) {
+  //   newGame();
+  // }
 }
 
 function keyPressed() {
@@ -61,13 +87,12 @@ function keyPressed() {
 }
 
 function newGame() {
-  birdY = 300
-  fallSpeed = -5
-  gravity = 0.3
-  pipePos = width
-  pipeSpeed = -4
-  score = 0
+  birdY = 300;
+  fallSpeed = -5;
+  gravity = 0.3;
+  pipePos = width;
+  pipeSpeed = -4;
+  score = 0;
   gapSize = 200;
   gapHeight = random(height - gapSize);
 }
-
