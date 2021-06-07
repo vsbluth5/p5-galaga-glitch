@@ -1,4 +1,4 @@
-let birdY, fallSpeed, gravity, pipePos, pipeSpeed, score;
+let birdY, fallSpeed, gravity, pipePos, pipeSpeed, score, gapSize, gapHeight;
 
 function setup() {
   createCanvas(800, 600);
@@ -26,13 +26,21 @@ function draw() {
   }
 
   // draw the moving pipe
-  rect(pipePos, 0, 50, 250);
-  rect(pipePos, 350, 50, height - 350);
+  // rect(pipePos, 0, 50, 250);
+  // rect(pipePos, 350, 50, height - 350);
+  
+  rect(pipePos, 0, 50, gapHeight)
+  rect(pipePos, gapHeight + gapSize, 50, height - (gapHeight + gapSize))
+
   pipePos += pipeSpeed;
 
   if (pipePos < -50) {
     score += 1
     pipePos = width;
+    
+    // increase difficulty
+    pipeSpeed += -0.5
+gravity += 0.01
   }
   
   // function takes seven paramters: rectX, rectY, rectWidth, rectHeight, circleX, circleY, circleDiameter
@@ -59,5 +67,7 @@ function newGame() {
   pipePos = width
   pipeSpeed = -4
   score = 0
+  gapSize = 200;
+  gapHeight = random(height - gapSize);
 }
 
