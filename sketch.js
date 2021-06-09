@@ -20,6 +20,10 @@ function draw() {
 
   for (let i = 0; i < projectiles.length; i++) {
     projectiles[i].move();
+    for (let j = 0; j < aliens.length; j++) {
+      projectiles[i].checkHit(aliens[j]);
+    }
+
     projectiles[i].display();
     if (projectiles[i].y < -10) {
       projectiles.splice(i, 1);
@@ -60,8 +64,22 @@ class Projectile {
   display() {
     rect(this.x, this.y, 4, 10);
   }
-  
-  checkHit() }
+
+  checkHit(alien) {
+    const hit = collideRectRect(
+      this.x,
+      this.y,
+      4,
+      10,
+      alien.x,
+      alien.y,
+      20,
+      20
+    );
+    if (hit) {
+      alien.status = "dead";
+    }
+  }
 }
 
 class Alien {
